@@ -6,15 +6,7 @@
 
 **GitHub** is a website that hosts Git repositories online. It provides backup, synchronization between machines, sharing, collaboration, and a convenient way to browse project history.
 
-For PDE/ODE projects, Git provides a record of how solvers, notebooks, and utilities evolve over time. Instead of maintaining files such as
-
-```text
-etd_rk4_final.ipynb
-etd_rk4_final_v2.ipynb
-etd_rk4_final_v2_fixed.ipynb
-```
-
-you can keep a clean repository and let Git remember the history.
+For PDE/ODE projects, Git provides a record of how solvers, notebooks, and utilities evolve over time.
 
 ---
 
@@ -129,11 +121,75 @@ git push
 - Commit at stable checkpoints.
 - A clean repository is a happy repository.
 
-A healthy workflow for a personal research repository is:
+---
+
+# 5) The Most Important Git Idea: A Commit is a Snapshot of the Entire Repository
+
+A commit is not attached to a particular file. A commit is a snapshot of the entire repository at a particular moment in time.
+
+Suppose the repository contains:
+
+```text
+Manifest.toml
+ReadMe.md
+notebooks/
+    etd_euler.ipynb
+    phi_functions.ipynb
+```
+
+## Commit A
+
+```text
+Manifest.toml          version 1
+ReadMe.md             version 1
+etd_euler.ipynb       version 1
+phi_functions.ipynb   version 1
+```
+
+## Commit B
+
+Only `etd_euler.ipynb` changes:
+
+```text
+Manifest.toml          version 1
+ReadMe.md             version 1
+etd_euler.ipynb       version 2
+phi_functions.ipynb   version 1
+```
+
+## Commit C
+
+Only `ReadMe.md` changes:
+
+```text
+Manifest.toml          version 1
+ReadMe.md             version 2
+etd_euler.ipynb       version 2
+phi_functions.ipynb   version 1
+```
+
+Git stores a sequence of repository snapshots:
+
+```text
+Commit A
+    ↓
+Commit B
+    ↓
+Commit C
+```
+
+When you run:
 
 ```powershell
 git status
-git add .
-git commit -m "Meaningful description"
-git push
 ```
+
+Git compares:
+
+```text
+Current repository state
+        versus
+Most recent commit
+```
+
+and reports which files differ.
